@@ -41,7 +41,7 @@ function draw() {
   //Funciones de algoritmos
   puntoPendiente()
   dda()
-  //TODO:  dda & bresenham
+  bresenham()
 
   circulo(x, y, r)
   circulo(x2, y2, r2)
@@ -154,6 +154,38 @@ function dda() {
           let xi = round((yi - b) / m)
           point(xi, yi)
         }
+      }
+    }
+  }
+}
+
+function bresenham() {
+
+  for (let i = 0; i < n; i++) {
+    let a = i * angulo - PI
+  
+    let x0 = x3
+    let y0 = y3
+    let x1 = round(x3 + r3 * cos(a))
+    let y1 = round(y3 + r3 * sin(a))
+  
+    let dx = abs(x1 - x0)
+    let dy = abs(y1 - y0)
+    let sx = x0 < x1 ? 1 : -1
+    let sy = y0 < y1 ? 1 : -1
+    let err = dx - dy
+  
+    while (x0 != x1 || y0 != y1) {
+      point(x0, y0)
+  
+      let e2 = 2 * err;
+      if (e2 > -dy) {
+        err -= dy
+        x0 += sx
+      }
+      if (e2 < dx) {
+        err += dx
+        y0 += sy
       }
     }
   }
